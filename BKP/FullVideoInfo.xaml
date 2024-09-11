@@ -1,0 +1,151 @@
+﻿<Window x:Class="BKP.FullVideoInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:BKP"
+        mc:Ignorable="d"
+        Title="Видео" Height="976.5" Width="1700" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                <TextBox
+                    Height="100"
+                    VerticalAlignment="Top"
+                    BorderThickness="6"
+                    BorderBrush="#FFD0C884"
+                    FontSize="21"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    materialDesign:HintAssist.Hint="Название видеоролика"
+                    materialDesign:HintAssist.Foreground="Black"
+                    materialDesign:TextFieldAssist.CharacterCounterVisibility="Visible"
+                    MaxLength="100"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto" Margin="50,100,0,0"
+                    Text="Клим Жуков. Мифы о ножах: где правда, а где ложь? 1 часть!"/>
+                <TextBox
+                    Height="475"
+                    VerticalAlignment="Top"
+                    BorderThickness="6"
+                    BorderBrush="#FFD0C884"
+                    FontSize="21"
+                    FontWeight="Normal"
+                    Foreground="Black"
+                    materialDesign:HintAssist.Hint="Описание"
+                    materialDesign:HintAssist.Foreground="Black"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    VerticalScrollBarVisibility="Auto" Margin="50,60,0,0" Width="689">
+                    <TextBox.Text>
+                        Telegram-канал: https://t.me/empireofknives
+                        Группа ВКонтакте: https://vk.com/eknives
+                        Магазин: https://eknives.info
+
+                        Империя ножей — крупнейший производитель ножей в России. Продажа ножей с доставкой по всей России и ближнему зарубежью
+
+                        Фото взяты с форума Rusknife.com и из других открытых источников
+                    </TextBox.Text>
+                </TextBox>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Margin="90,100,0,0" Orientation="Horizontal" VerticalAlignment="Top">
+                <DatePicker
+                    FontSize="25"
+                    materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                    materialDesign:HintAssist.FloatingOffset="0,-22"
+                    materialDesign:HintAssist.Hint="Дата съемок"
+                    materialDesign:HintAssist.Foreground="Black"
+                    Margin="0,0,30,0"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" >
+                    <DatePicker.CalendarStyle>
+                        <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                            <Style.Resources>
+                                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                            </Style.Resources>
+                        </Style>
+                    </DatePicker.CalendarStyle>
+                </DatePicker>
+                <DatePicker
+                    FontSize="25"
+                    materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                    materialDesign:HintAssist.FloatingOffset="0,-22"
+                    materialDesign:HintAssist.Hint="Дата публикации"
+                    materialDesign:HintAssist.Foreground="Black"
+                    Margin="0,0,30,0"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" >
+                    <DatePicker.CalendarStyle>
+                        <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                            <Style.Resources>
+                                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                            </Style.Resources>
+                        </Style>
+                    </DatePicker.CalendarStyle>
+                </DatePicker>
+                    <Button 
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        materialDesign:ButtonAssist.CornerRadius="20"
+                        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                        Style="{StaticResource MaterialDesignRaisedLightButton}"
+                        ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="69" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="338" Click="Button_Click">
+                        <TextBlock Text="Перейти к сценарию" FontSize="30" Height="48"/>
+                    </Button>
+                </StackPanel>
+        </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Сотрудники, задействованные в видео" FontWeight="Bold" Margin="830,-500,90, 0" FontSize="30"/>
+                <DataGrid Margin="830,-680,31,0" x:Name="Employee_info" AutoGenerateColumns="False" FontSize="25" Height="222">
+                    <DataGrid.Columns>
+                        <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding employee_id}"/>
+                        <materialDesign:DataGridTextColumn Header="ФИО сотрудника" Binding="{Binding employee_name}"/>
+                        <materialDesign:DataGridTextColumn Header="Должность" Binding="{Binding employee_position}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <TextBlock Text="Товар, задействованный в видео" FontWeight="Bold" Margin="830,-210,90, 0" FontSize="30"/>
+                <DataGrid Margin="830,-160,31,0" x:Name="Good_info" AutoGenerateColumns="False" FontSize="25" Height="222">
+                    <DataGrid.Columns>
+                        <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding good_id}"/>
+                        <materialDesign:DataGridTextColumn Header="Название товара" Binding="{Binding good_name}"/>
+                        <materialDesign:DataGridTextColumn Header="Бренд" Binding="{Binding good_brand}"/>
+                        <materialDesign:DataGridTextColumn Header="Номер резерва" Binding="{Binding good_reserve}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Orientation="Horizontal">
+                    <Button 
+                    HorizontalAlignment="Left"
+                    Margin="50, 30, 0, 0"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="380">
+                        <TextBlock Text="Сохранить изменения" FontSize="32"/>
+                    </Button>
+                    <Button 
+                    HorizontalAlignment="Left"
+                    Margin="50,30,0,0"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0E9F0" BorderBrush="#FFD0F0D8" Width="489">
+                        <TextBlock Text="Создать задачу на основании" FontSize="32"/>
+                    </Button>
+                    <Button 
+                    HorizontalAlignment="Left"
+                    Margin="50, 30, 0, 0"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFF0D0D0" BorderBrush="#FFD0F0D8" Width="263">
+                        <TextBlock Text="Удалить запись" FontSize="32"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

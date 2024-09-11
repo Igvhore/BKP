@@ -1,0 +1,184 @@
+﻿<Window x:Class="BKP.Script"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:BKP"
+        mc:Ignorable="d"
+        Title="Script" WindowState="Maximized" WindowStartupLocation="CenterScreen" Width="867" Height="993.075">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Width="814">
+            <ToolBarTray>
+                <ToolBar
+                    ClipToBounds="False"
+                    Style="{StaticResource MaterialDesignToolBar}">
+                    <Button
+                        Command="Cut"
+                        Content="{materialDesign:PackIcon Kind=ContentCut}"
+                        ToolBar.OverflowMode="AsNeeded"
+                        ToolTip="Cut" />
+                    <Button
+                        Command="Copy"
+                        Content="{materialDesign:PackIcon Kind=ContentCopy}"
+                        ToolBar.OverflowMode="AsNeeded"
+                        ToolTip="Copy that stuff" />
+                    <Button
+                        Command="Paste"
+                        Content="{materialDesign:PackIcon Kind=ContentPaste}"
+                        ToolBar.OverflowMode="AsNeeded"
+                        ToolTip="Paste some stuff" />
+                    <ListBox
+                         SelectedIndex="0">
+                        <ListBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock
+                                    Text="MaterialDesignToolToggleFlatListBox" />
+                                <TextBlock
+                                     Text="Exclusive selection" />
+                                <TextBlock
+                                     Text="ListBoxAssist.IsToggle allows more natural toggle behaviour" />
+                            </StackPanel>
+                        </ListBox.ToolTip>
+                        <ListBoxItem
+                             Content="{materialDesign:PackIcon Kind=FormatAlignLeft}" />
+                        <ListBoxItem
+                            Content="{materialDesign:PackIcon Kind=FormatAlignCenter}" />
+                        <ListBoxItem
+                            Content="{materialDesign:PackIcon Kind=FormatAlignRight}" />
+                        <ListBoxItem
+                            Content="{materialDesign:PackIcon Kind=FormatAlignJustify}" />
+                    </ListBox>
+                    <ListBox
+                            SelectionMode="Extended">
+                        <ListBox.ToolTip>
+                            <StackPanel>
+                                <TextBlock
+                                    Text="MaterialDesignToolToggleListBox" />
+                                <TextBlock
+                                    Text="Multiple selection" />
+                                <TextBlock
+                                    Text="ListBoxAssist.IsToggle allows more natural toggle behaviour" />
+                            </StackPanel>
+                        </ListBox.ToolTip>
+                        <ListBoxItem
+                            Content="{materialDesign:PackIcon Kind=FormatBold}" />
+                        <ListBoxItem
+                            Content="{materialDesign:PackIcon Kind=FormatItalic}" />
+                        <ListBoxItem
+                            Content="{materialDesign:PackIcon Kind=FormatUnderline}" />
+                    </ListBox>
+                    <Label
+                      VerticalAlignment="Center"
+                      Content="Размер шрифта:" />
+                    <ComboBox>
+                        <ComboBoxItem
+                            Content="10" />
+                        <ComboBoxItem
+                            Content="12"
+                            IsSelected="True" />
+                        <ComboBoxItem
+                            Content="14" />
+                        <ComboBoxItem
+                            Content="16" />
+                    </ComboBox>
+                    <Button
+                        Content="{materialDesign:PackIcon Kind=Hotel}"
+                        ToolBar.OverflowMode="Always"
+                        ToolTip="Take a nap" />
+                </ToolBar>
+            </ToolBarTray>
+            <TextBox
+                    Height="752"
+                    VerticalAlignment="Top"
+                    FontSize="20"
+                    FontWeight="Normal"
+                    Foreground="Black"
+                    AcceptsReturn="True"
+                    TextWrapping="Wrap"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    VerticalScrollBarVisibility="Auto">
+                <TextBox.Text>
+                    Эфир про дизайны ножей
+
+
+Список ножей:
+Военные ножи
+Торн и Грейв
+Туристические ножи
+Серия Айсберги/Ranger/Forester
+Охотничьи ножи
+Fang или Crony?
+На рыбалку
+Mora Floating
+Серрейтор 
+Mini My Tighe 1093/Voyager Extra Large Vaquero
+EDC в город 
+Astris/Pike/Stylus
+Тантойды
+AD10/Recon Tanto
+Многопредметники 
+Victorinox Nomad blue/Многопредметный нож MBS030 +  Мультитул MBS041
+Кухня?
+Scout/Pioneer
+Что то странное
+Kris Voyager
+Что можно сделать
+Для торна/грейва/тантоидов показать выносливость на укол. Вскрыть банку тушенки грейвом например/воткнуть нож в кусок доски
+Охотничьи. Упомянуть про шкуросъем/важность реза. Mora Floating показать, что не тонет в воде. Может рез продуктов и бумаги вместе с EDC ножами, Kris Voyager ом и серейтором. При этом показать, что торн режет хуже
+Многопредметники. Просто упомянуть о существовании, возможно во время рассказа о туристических ножах 
+Серрейтор. Рез картона, паракорда, ремней безопасности, хлеба. Упомянуть про заточку. К сожалению, не нашел ножа по типу такого: https://forest-home.ru/product/stroporez-gerber-strap-cutter-stal-420hc-rukoyat-coyote-brown-rubber-22-01944/ или https://forest-home.ru/product/multitul-leatherman-raptor-blue/ В теории можно взять https://www.eknives.ru/brandMrblade/6870.html
+Туристические. Показать классические дизайны клинков
+Тесты:
+	Рез продуктов (помидоры, огурцы, хлеб, лук), рез паракорда, ремней безопасности или может кожаных ремней, вскрытие консервы, уколы в 5 рублевую монету или доску, рез листов А4 и картона, батонинг
+
+
+
+
+Ножей существует великое множества, они могут отличаться материалами, размерами и, как и любой инструмент предназначением. Все наши телезрители использовали хотя бы раз в жизни кухонные ножи, и несмотря на то, что блюда порой состоят из малого числа продуктов, под каждый из ингредиентов профессиональные повара выбирают инструмент определенной формы.
+Помимо готовки существует великое множество ситуаций, в которых вам может пригодится нож, начиная от похода или поездки на пикник, охоты, рыбалки, заканчивая открытием посылки, которую вы только что забрали с почты. Во всех вышеупомянутых случаях внешний вид используемого ножа может сильно отличаться, так как отличается, и причина по которой нужно было им воспользоваться. Сегодня мы поговорим о различных дизайнах, обусловленных спецификой использования
+Стартовой точкой для общего понимания будут классические шеф ножи, которые мы используем на кухне. Требования к ним довольно простые: широкий, длинный, узкий в обухе клинок со спусками от обуха. Именно такая геометрия обеспечивает нужный нам рез. Помимо кухни, готовить можно на даче или в походе, где больше актуальны ножи туристические о которых мы уже поговорим предметно
+Использовать туристические ножи можно для выполнения самых разных задач, начиная от заготовки дров для костра, заканчивая той же самой готовкой. В данном случае к ножу предъявляются повышенные требования к прочности. Рассмотрим подробнее на примере модели Ranger от компании N.C. Custom. Это большой, фиксированный лагерник, который не боится тяжелой нагрузки. Для увеличения прочности нож выполнен по технологии full tang, то есть хвостовик не сужается рукоять состоит из накладок прикрученых по бокам. Такое решение позволяет предотвратить ситуацию при которой хвостовик ножа в зоне сужения ломается. Если рукоять каким то образом развалится, хвостовик можно обмотать куском ткани и пользоваться ножом дальше. Такой нож достаточно неплохо себя покажет в готовке, но что на мой взгляд более важно при заготовке дров для костра. Помимо строгания и рубки небольших веток, туристическим ножом можно батонить. (показать и рассказать). В комплекте идет огниво, ножны на свободном подвесе из кожи. Стоит отметить, что вы также можете использовать туристические ножи для создания посуды из дерева, для чего вам не понадобиться нож большого размера и может подойти даже складной. (Все под задачи)
+Еще более повышенные требования предъявляются к ножам военным. Как и любая вещь, используемая военнослужащими и сотрудниками различных органов, нож не может подвести своего хозяина. Основной задачей для подобного рода изделий является уничтожение противника. Стоит сказать, что в современных реалиях подобное использование крайне редко, так как в распоряжении человека находится большое количество различного снаряжения для выполнения поставленных задач. Нож скорее выступает инструментом последнего шанса. Например, модель торн от компании N.C. Custom. Нож удобно извлекается из ножен за кольцо, которое также обеспечивает безопасность рабочей руки. Дуплексные спуски позволяют нам иметь хоть какой-то режущий инструмент в меру размеров и геометрии, и при этом не переживать за стойкость кончика, однако, все мы прекрасно знаем, что сотрудники тоже люди, обремененные обычными бытовыми задачами, например готовкой. Для этого, подобного рода изделия используются довольно часто и одной из задач может быть открытие консервы. Как вы понимаете широкий и длинный кухонный нож будет крайне неудобен для выполнения такой задачи. Вскрыть консервы. Важно упомянуть и ножны. Они должны иметь возможность удобного размещения в том числе и на снаряжении. Показать, что грейв заходит обеими сторонами. Сотрудника может носить нож при себе находясь в гражданской одежде. Показать скрытое ношение. Касательно форм клинка стоит выделить Spear Point и Dagger. Обе эти формы предназначены для укола, в случае с Spear Point ом нож еще может быть использован как инструмент, но Dagger это скорее оружие в чистом виде
+В виду особенностей действующего законодательство кинжалы, доступные обычному населению (относятся к холодному оружию приобретаются по лицензии РОХа (разрешение на хранение и ношение оружия)) имеют довольно большие размеры и могут быть по достоинству оценены охотниками при доборе дичи или самообороне в самый крайний случай (понятное дело, что раненый зверь способен на все и до такой ситуации лучше не доводить, однако нож будет всяко лучше чем палка). Но и охотники, как и военные используют ножи как инструмент. С дичи нужно снять шкуру или в конце концов ее необходимо приготовить. Для вспарывания брюшной полости на ноже может присутствовать крюк, сам нож при этом может обладать вмеру длинным широким клинком со спусками от обуха для обеспечения комфортного реза.
+Не стоит забывать о рыболовах. В данном случае нередко на подобных ножах можно встретить серрейтор на обухе для работы с костями или хрящами крупной рыбы, крюк для вспарывания, а сам клинок в меру длинный и достаточно узкий. Встречаются и ножи с рукояткой из материалов, которые не позволяют ему утонуть, что для рыбаков актуально
+Ножи с серрейторм. Что такое серрейтор? Как вы видите у данного ножа режущая кромка прямая, серрейтор же напоминает зубы с двумя ключевыми точками зубцы и углубления. Такой нож с зазубринами прекрасно режет различные волокнистые материалы: шнуры, канаты, ткань, кожу, то же мясо. Причем режет очень агрессивно и быстро. С ювелирной точностью работать не получится. Именно поэтому у спасателей, пожарных, сотрудников дорожно-патрульной службы вполне может оказаться нож с полностью серрейторной заточкой. Он отлично разрежет ремень безопасности в автомобиле. Серрейтор также часто можно встретить на ножах для хлеба и на столовых приборах. Связано это с тем, что серрейтор сложнее затупить. Керамические тарелки в виду твердости материала затупят любой нож с менее твердой чем керамика сталь. В случае с серрейтором тупится будут зубцы, но углубления будут работать только с материалом (мясо, рыба и т.д.). Однако, если серрейтор наконец, то был затуплен, его заточка будет большой проблемой для пользователя, если он точит сам или для заточника
+Под конец поговорим о ножах EDC, которые можно носить с собой в городе каждый день. В данном случае самым правильным будет сказать носите то, что вам нравится. В этой категории личный вкус пользователя играет ключевую роль. Материалы, размеры отходят на второй план, если нож нравится пользователю внешне. Помните, что вы будете окружены другими людьми, которые совершенно могут быть незнакомы с ножевой культурой. Если вы решили взять огромной тесак не удивляйтесь, что люди будут вас боятся или задавать странные вопросы. Лично я взял бы складной нож с клинком не более 120 мм
+
+
+
+
+                </TextBox.Text>
+            </TextBox>
+            <StackPanel Orientation="Horizontal" Height="133" VerticalAlignment="Top">
+                <Button
+                    HorizontalAlignment="Left"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    Margin="0,50,0,0"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="293">
+                    <TextBlock Text="Сохранить изменения" FontSize="25"/>
+                </Button>
+                <Button
+                    HorizontalAlignment="Left"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    Margin="50,50,0,0"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFF0E6D0" BorderBrush="#FFD0F0D8" Width="277">
+                    <TextBlock Text="Отправить на печать" FontSize="25"/>
+                </Button>
+                <Button
+                HorizontalAlignment="Left"
+                materialDesign:ButtonAssist.CornerRadius="20"
+                Margin="50,52,0,1"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFF0D0D0" BorderBrush="#FFD0F0D8" Width="145">
+                    <TextBlock Text="Выйти" FontSize="25"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

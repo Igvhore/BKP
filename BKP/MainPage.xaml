@@ -1,0 +1,1064 @@
+﻿<Window x:Class="BKP.MainPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:BKP" 
+        mc:Ignorable="d" 
+        Title="Главная страница" Height="1080" Width="1920"
+        WindowState="Maximized">
+
+    <Grid>
+        <materialDesign:PackIcon Kind="Account" Margin="1717,45,0,0" Height="129" Width="129" BorderBrush="#FFD0C884" Foreground="#FFD0C884" />
+        <materialDesign:Card>
+            <TabControl
+                VerticalContentAlignment="Top"
+                Style="{StaticResource MaterialDesignNavigationRailTabControl}" Foreground="#DD000000" Background="#FFFAFAFA">
+                <TabItem Width="143">
+                    <TabItem.Header>
+                        <StackPanel 
+                              Width="auto"
+                              Height="auto">
+                            <materialDesign:PackIcon
+                                Foreground="#FFD0C884"
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="Video" />
+                            <TextBlock 
+                                Foreground="Black"
+                                HorizontalAlignment="Center"
+                                Text="Видео" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal" >
+                                <DatePicker
+                                  FontSize="25"
+                                  materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                  materialDesign:HintAssist.FloatingOffset="0,-22"
+                                  materialDesign:HintAssist.Hint="Выберите период"
+                                  materialDesign:HintAssist.Foreground="Black"
+                                  Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,100,40,0" >
+                                    <DatePicker.CalendarStyle>
+                                        <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                            <Style.Resources>
+                                                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                                <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                            </Style.Resources>
+                                        </Style>
+                                    </DatePicker.CalendarStyle>
+                                </DatePicker>
+                                <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,100,0,0" Foreground="#FFD0C884"/>
+                            </StackPanel>
+                            <DataGrid Margin="40" x:Name="Video_info" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25" SelectionChanged="Video_info_SelectionChanged">
+                                <DataGrid.Columns >
+                                    <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding video_id}"  />
+                                    <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding video_title}"/>
+                                    <materialDesign:DataGridTextColumn Header="Дата съемок" Binding="{Binding shooting_date}"/>
+                                    <materialDesign:DataGridTextColumn Header="Дата публикации" Binding="{Binding publication_date}"/>
+                                    <DataGridTemplateColumn Header="Сценарий" IsReadOnly="True">
+                                        <DataGridTemplateColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <materialDesign:PackIcon Kind="FileDownload" Width="50" Height="50" HorizontalAlignment="Center"/>
+                                            </DataTemplate>
+                                        </DataGridTemplateColumn.CellTemplate>
+                                    </DataGridTemplateColumn>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                            <Button 
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Margin="40,0,1413,0" Click="Button_Click">
+                                <TextBlock
+                              Text="Создать видео" FontSize="32"/>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Width="143">
+                    <TabItem.Header>
+                        <StackPanel
+                          Width="auto"
+                          Height="auto">
+                            <materialDesign:PackIcon
+                                Foreground="#FFD0C884"
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="ListBox" />
+                            <TextBlock
+                                Foreground="Black"
+                                HorizontalAlignment="Center"
+                                Text="Задачи" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <DatePicker
+                          FontSize="25"
+                          materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                          materialDesign:HintAssist.FloatingOffset="0,-22"
+                          materialDesign:HintAssist.Hint="Выберите период"
+                          materialDesign:HintAssist.Foreground="Black"
+                          Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,100,40,0" >
+                                <DatePicker.CalendarStyle>
+                                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                        <Style.Resources>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                        </Style.Resources>
+                                    </Style>
+                                </DatePicker.CalendarStyle>
+                            </DatePicker>
+                            <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,100,0,0" Foreground="#FFD0C884"/>
+                        </StackPanel>
+
+                        <DataGrid Margin="40" x:Name="Task_info" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25" SelectionChanged="Task_info_SelectionChanged">
+                            <DataGrid.Columns >
+                                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding task_id}"  />
+                                <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding task_title}"/>
+                                <materialDesign:DataGridTextColumn Header="Дата назначения" Binding="{Binding assignment_date}"/>
+                                <materialDesign:DataGridTextColumn Header="Ожидаемая дата выполнения" Binding="{Binding estimated_date}"/>
+                                <materialDesign:DataGridTextColumn Header="Постановщик" Binding="{Binding employee_who_gave_the_task}"/>
+                                <materialDesign:DataGridTextColumn Header="Статус" Binding="{Binding task_status}"/>
+                            </DataGrid.Columns>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding task_status}" Value="Выполнено">
+                                            <Setter Property="Background" Value="#D0F0D8"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding task_status}" Value="В работе">
+                                            <Setter Property="Background" Value="#FFF0D0D0"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                        <Button 
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Margin="40,0,1413,0" Click="Button_Click_1">
+                            <TextBlock
+                              Text="Создать задачу" FontSize="32"/>
+                        </Button>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Width="143">
+                    <TabItem.Header>
+                        <StackPanel
+                              Width="auto"
+                              Height="auto">
+                            <materialDesign:PackIcon
+                                Foreground="#FFD0C884"
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="ChartBar" />
+                            <TextBlock
+                                Foreground="Black"
+                                HorizontalAlignment="Center"
+                                Text="Отчеты" />
+
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <materialDesign:Card>
+                            <TabControl
+                                HorizontalContentAlignment="Left"
+                                materialDesign:ColorZoneAssist.Background="#FFD0C884"
+                                 materialDesign:ColorZoneAssist.Foreground="Black"
+                                Style="{StaticResource MaterialDesignFilledTabControl}">
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <TextBlock Text="Календарь событий" 
+                                                   />
+                                    </TabItem.Header>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <DatePicker
+                                              HorizontalAlignment="Left"
+                                              FontSize="25"
+                                              materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                              materialDesign:HintAssist.FloatingOffset="0,-22"
+                                              materialDesign:HintAssist.Hint="Выберите период"
+                                              materialDesign:HintAssist.Foreground="Black"
+                                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,40,40,0" Width="266" >
+                                                <DatePicker.CalendarStyle>
+                                                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                                        <Style.Resources>
+                                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                                        </Style.Resources>
+                                                    </Style>
+                                                </DatePicker.CalendarStyle>
+                                            </DatePicker>
+                                            <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,40,0,0" Foreground="#FFD0C884"/>
+                                        </StackPanel>
+                                        <DataGrid Margin="40" x:Name="Event_report" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25">
+                                            <DataGrid.Columns >
+                                                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding event_id}"  />
+                                                <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding event_title}"/>
+                                                <materialDesign:DataGridTextColumn Header="Описание события" Binding="{Binding event_description}"/>
+                                                <materialDesign:DataGridTextColumn Header="Задачи" Binding="{Binding event_tasks}"/>
+                                                <materialDesign:DataGridTextColumn Header="Дата события" Binding="{Binding event_date}"/>
+                                            </DataGrid.Columns>
+                                            <DataGrid.RowStyle>
+                                                <Style TargetType="DataGridRow">
+                                                </Style>
+                                            </DataGrid.RowStyle>
+                                        </DataGrid>
+                                        <TextBox
+                                            Height="185"
+                                            HorizontalAlignment="Left"
+                                            BorderThickness="6"
+                                            BorderBrush="#FFD0C884"
+                                            FontSize="21"
+                                            FontWeight="Normal"
+                                            Foreground="Black"
+                                            AcceptsReturn="True"
+                                            TextWrapping="Wrap"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            VerticalScrollBarVisibility="Auto" Margin="40,0,0,0" Width="689">
+                                            <TextBox.Text>
+                                                Общее количество событий:
+                                                Количество задач, сгенерированных событиями:
+                                                Среднее количество задач на одно событие:
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button 
+                                            HorizontalAlignment="Left"
+                                            Margin="40, 20, 0, 40"
+                                            materialDesign:ButtonAssist.CornerRadius="20"
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="305">
+                                                <TextBlock Text="Сохранить отчет" FontSize="32"/>
+                                            </Button>
+                                            <Button
+                                                HorizontalAlignment="Left"
+                                                materialDesign:ButtonAssist.CornerRadius="20"
+                                                Margin="30,20,0,40"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                                ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFF0E6D0" BorderBrush="#FFD0F0D8" Width="355">
+                                                <TextBlock Text="Отправить на печать" FontSize="32"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <TextBlock  Text="Эффективность сотрудников"/>
+                                    </TabItem.Header>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox
+                                              HorizontalAlignment="Center"
+                                              FontSize="25"
+                                              materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                              materialDesign:HintAssist.FloatingOffset="0,-22"
+                                              materialDesign:HintAssist.Hint="Выберите сотрудника"
+                                              materialDesign:HintAssist.Foreground="Black"
+                                              BorderBrush="Black"
+                                                BorderThickness="2"
+                                              Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="40,40,40,0" Width="287" >
+                                            </TextBox>
+                                            <DatePicker
+                                              HorizontalAlignment="Left"
+                                              FontSize="25"
+                                              materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                              materialDesign:HintAssist.FloatingOffset="0,-22"
+                                              materialDesign:HintAssist.Hint="Выберите период"
+                                              materialDesign:HintAssist.Foreground="Black"
+                                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,40,40,0" Width="266" >
+                                                <DatePicker.CalendarStyle>
+                                                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                                        <Style.Resources>
+                                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                                        </Style.Resources>
+                                                    </Style>
+                                                </DatePicker.CalendarStyle>
+                                            </DatePicker>
+                                            <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,40,0,0" Foreground="#FFD0C884"/>
+                                        </StackPanel>
+                                        <DataGrid Margin="40" x:Name="Employee_efficiency" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25" HorizontalAlignment="Left" HorizontalContentAlignment="Center">
+                                            <DataGrid.Columns>
+                                                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding task_id}"/>
+                                                <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding task_title}"/>
+                                                <materialDesign:DataGridTextColumn Header="Дата назначения" Binding="{Binding assignment_date}"/>
+                                                <materialDesign:DataGridTextColumn Header="Ожидаемая дата выполнения" Binding="{Binding estimated_date}"/>
+                                                <materialDesign:DataGridTextColumn Header="Реальная дата выполнения" Binding="{Binding real_date}"/>
+                                            </DataGrid.Columns>
+                                            <DataGrid.RowStyle>
+                                                <Style TargetType="DataGridRow">
+                                                </Style>
+                                            </DataGrid.RowStyle>
+                                        </DataGrid>
+                                        <TextBox
+                                            Height="185"
+                                            HorizontalAlignment="Left"
+                                            BorderThickness="6"
+                                            BorderBrush="#FFD0C884"
+                                            FontSize="21"
+                                            FontWeight="Normal"
+                                            Foreground="Black"
+                                            AcceptsReturn="True"
+                                            TextWrapping="Wrap"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            VerticalScrollBarVisibility="Auto" Margin="40,0,0,0" Width="689">
+                                            <TextBox.Text>
+                                                Всего задач:
+                                                Задач с переработкой:
+                                                Коэффициент эффективности:
+                                            </TextBox.Text>
+                                        </TextBox>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button 
+                                            HorizontalAlignment="Left"
+                                            Margin="40, 20, 0, 40"
+                                            materialDesign:ButtonAssist.CornerRadius="20"
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="305">
+                                                <TextBlock Text="Сохранить отчет" FontSize="32"/>
+                                            </Button>
+                                            <Button
+                                                HorizontalAlignment="Left"
+                                                materialDesign:ButtonAssist.CornerRadius="20"
+                                                Margin="30,20,0,40"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                                ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFF0E6D0" BorderBrush="#FFD0F0D8" Width="355">
+                                                <TextBlock Text="Отправить на печать" FontSize="32"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <TextBlock  Text="Cтатистика"/>
+                                    </TabItem.Header>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox
+                                              HorizontalAlignment="Center"
+                                              FontSize="25"
+                                              materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                              materialDesign:HintAssist.FloatingOffset="0,-22"
+                                              materialDesign:HintAssist.Hint="Выберите социальную сеть"
+                                              materialDesign:HintAssist.Foreground="Black"
+                                              BorderBrush="Black"
+                                                BorderThickness="2"
+                                              Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="40,40,40,0" Width="348" >
+                                            </TextBox>
+                                            <DatePicker
+                                              HorizontalAlignment="Left"
+                                              FontSize="25"
+                                              materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                              materialDesign:HintAssist.FloatingOffset="0,-22"
+                                              materialDesign:HintAssist.Hint="Выберите период"
+                                              materialDesign:HintAssist.Foreground="Black"
+                                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,40,40,0" Width="266" >
+                                                <DatePicker.CalendarStyle>
+                                                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                                        <Style.Resources>
+                                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                                        </Style.Resources>
+                                                    </Style>
+                                                </DatePicker.CalendarStyle>
+                                            </DatePicker>
+                                            <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,40,0,0" Foreground="#FFD0C884"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <DataGrid Margin="40,40,40,0" x:Name="Sub_values" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25" HorizontalAlignment="Left" HorizontalContentAlignment="Center" MaxHeight="600" ScrollViewer.CanContentScroll ="True">
+                                                <DataGrid.Columns>
+                                                    <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding measure_id}"/>
+                                                    <materialDesign:DataGridTextColumn Header="Социальная сеть" Binding="{Binding social_name}"/>
+                                                    <materialDesign:DataGridTextColumn Header="Количество" Binding="{Binding measure_value}"/>
+                                                    <materialDesign:DataGridTextColumn Header="Дата измерения" Binding="{Binding measure_date}"/>
+                                                </DataGrid.Columns>
+                                                <DataGrid.RowStyle>
+                                                    <Style TargetType="DataGridRow">
+                                                    </Style>
+                                                </DataGrid.RowStyle>
+                                            </DataGrid>
+                                            <lvc:CartesianChart Name="Sub_ch"  Series="{Binding Sub_chart}" LegendLocation="Right" Width="950" Height="600" Margin="0,40,0,0">
+                                                <lvc:CartesianChart.AxisY>
+                                                    <lvc:Axis Title="Количество" Name="AxisX" LabelFormatter="{Binding YFormatter}"></lvc:Axis>
+                                                </lvc:CartesianChart.AxisY>
+                                                <lvc:CartesianChart.AxisX>
+                                                    <lvc:Axis Title="Дата" Name="AxisY" Labels="{Binding Labels}"></lvc:Axis>
+                                                </lvc:CartesianChart.AxisX>
+                                            </lvc:CartesianChart>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                            <Button 
+                            HorizontalAlignment="Left"
+                            Margin="40, 20, 0, 40"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="305">
+                                <TextBlock Text="Сохранить отчет" FontSize="32"/>
+                            </Button>
+                                <Button
+                                HorizontalAlignment="Left"
+                                materialDesign:ButtonAssist.CornerRadius="20"
+                                Margin="30,20,0,40"
+                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFF0E6D0" BorderBrush="#FFD0F0D8" Width="355">
+                                    <TextBlock Text="Отправить на печать" FontSize="32"/>
+                                </Button>
+                                            <TextBox
+                                            Height="117"
+                                            HorizontalAlignment="Left"
+                                            BorderThickness="6"
+                                            BorderBrush="#FFD0C884"
+                                            FontSize="21"
+                                            FontWeight="Normal"
+                                            Foreground="Black"
+                                            AcceptsReturn="True"
+                                            TextWrapping="Wrap"
+                                            Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                            VerticalScrollBarVisibility="Auto" Margin="40,0,0,0" Width="689">
+                                                <TextBox.Text>
+                                                     Число новых подписчиков: 
+                                                     Средний прирост за день:
+                                                </TextBox.Text>
+                                            </TextBox>
+                                        </StackPanel>
+                      </StackPanel>
+                                </TabItem>
+                                <!--<TabItem>
+                                    <TabItem.Header>
+                                        <TextBlock Text="Статистика по задачам"/>
+                                    </TabItem.Header>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <DatePicker
+                                              HorizontalAlignment="Left"
+                                              FontSize="25"
+                                              materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                              materialDesign:HintAssist.FloatingOffset="0,-22"
+                                              materialDesign:HintAssist.Hint="Выберите период"
+                                              materialDesign:HintAssist.Foreground="Black"
+                                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,40,40,0" Width="266" >
+                                                <DatePicker.CalendarStyle>
+                                                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                                        <Style.Resources>
+                                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                                        </Style.Resources>
+                                                    </Style>
+                                                </DatePicker.CalendarStyle>
+                                            </DatePicker>
+                                            <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,40,0,0" Foreground="#FFD0C884"/>
+                                        </StackPanel>
+                                        <DataGrid Margin="40" x:Name="Task_stat" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25">
+                                            <DataGrid.Columns>
+                                                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding task_id}"  />
+                                                <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding task_title}"/>
+                                                <materialDesign:DataGridTextColumn Header="Создано на основании" Binding="{Binding created_base}"/>
+                                                <materialDesign:DataGridTextColumn Header="Исполнитель" Binding="{Binding employee_executor}"/>
+                                                <materialDesign:DataGridTextColumn Header="Постановщик" Binding="{Binding employee_who_gave_the_task}"/>
+                                                <materialDesign:DataGridTextColumn Header="Статус" Binding="{Binding task_status}"/>
+                                            </DataGrid.Columns>
+                                            <DataGrid.RowStyle>
+                                                <Style TargetType="DataGridRow">
+                                                </Style>
+                                            </DataGrid.RowStyle>
+                                        </DataGrid>
+                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                            <Grid>
+                                                <StackPanel HorizontalAlignment="Center">
+                                                    <TextBlock Text="Статус задач" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                                    <Wpf:PieChart Series="{Binding Task_status_view}" LegendLocation="Bottom" FontSize="20"  Name="TaskStatusPie" Height="300" Width="513" HorizontalAlignment="Center">
+                                                    </Wpf:PieChart>
+                                                </StackPanel>
+                                            </Grid>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Button 
+                                            HorizontalAlignment="Left"
+                                            Margin="40, 40, 0, 40"
+                                            materialDesign:ButtonAssist.CornerRadius="20"
+                                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="292">
+                                                <TextBlock Text="Сохранить отчет" FontSize="32"/>
+                                            </Button>
+                                            <Button
+                                                HorizontalAlignment="Left"
+                                                materialDesign:ButtonAssist.CornerRadius="20"
+                                                Margin="50,40,0,40"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                                ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFF0E6D0" BorderBrush="#FFD0F0D8" Width="355">
+                                                <TextBlock Text="Отправить на печать" FontSize="32"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>-->
+                            </TabControl>
+                        </materialDesign:Card>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Width="143">
+                    <TabItem.Header>
+                        <StackPanel
+                              Width="auto"
+                              Height="auto">
+                            <materialDesign:PackIcon
+                                Foreground="#FFD0C884"
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="PostageStamp" />
+                            <TextBlock
+                                Foreground="Black"
+                                HorizontalAlignment="Center"
+                                Text="Публикации" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <DatePicker
+                                HorizontalAlignment="Left"
+                                FontSize="25"
+                                materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                materialDesign:HintAssist.FloatingOffset="0,-22"
+                                materialDesign:HintAssist.Hint="Выберите период"
+                                materialDesign:HintAssist.Foreground="Black"
+                                Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,40,40,0" Width="266" >
+                                <DatePicker.CalendarStyle>
+                                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                        <Style.Resources>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                        </Style.Resources>
+                                    </Style>
+                                </DatePicker.CalendarStyle>
+                            </DatePicker>
+                            <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,40,0,0" Foreground="#FFD0C884"/>
+                        </StackPanel>
+                        <DataGrid Margin="40" x:Name="Publication_info" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25" SelectionChanged="Task_info_SelectionChanged">
+                            <DataGrid.Columns >
+                                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding post_id}"  />
+                                <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding post_title}"/>
+                                <materialDesign:DataGridTextColumn Header="Тип публикации" Binding="{Binding post_type}"/>
+                                <materialDesign:DataGridTextColumn Header="Дата публикации" Binding="{Binding post_date}"/>
+                                <materialDesign:DataGridTextColumn Header="Ответсвенный сотрудник" Binding="{Binding post_employee}"/>
+                                <materialDesign:DataGridTextColumn Header="Социальная сеть" Binding="{Binding post_social}"/>
+                            </DataGrid.Columns>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding task_status}" Value="Выполнено">
+                                            <Setter Property="Background" Value="#D0F0D8"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding task_status}" Value="В работе">
+                                            <Setter Property="Background" Value="#FFF0D0D0"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                        <Button 
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Margin="40,0,1366,0">
+                            <TextBlock
+                              Text="Создать публикацию" FontSize="32"/>
+                        </Button>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Width="143">
+                    <TabItem.Header>
+                        <StackPanel
+                              Width="auto"
+                              Height="auto">
+                            <materialDesign:PackIcon
+                                Foreground="#FFD0C884"
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="TreasureChest" />
+                            <TextBlock
+                                Foreground="Black"
+                                HorizontalAlignment="Center"
+                                Text="Резервирование" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <DatePicker
+                          FontSize="25"
+                          materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                          materialDesign:HintAssist.FloatingOffset="0,-22"
+                          materialDesign:HintAssist.Hint="Выберите период"
+                          materialDesign:HintAssist.Foreground="Black"
+                          Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,100,40,0" >
+                                <DatePicker.CalendarStyle>
+                                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                        <Style.Resources>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                        </Style.Resources>
+                                    </Style>
+                                </DatePicker.CalendarStyle>
+                            </DatePicker>
+                            <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,100,0,0" Foreground="#FFD0C884"/>
+                        </StackPanel>
+                        <DataGrid Margin="40" x:Name="Reserve_info" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25" SelectionChanged="Reserve_info_SelectionChanged">
+                            <DataGrid.Columns >
+                                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding reserve_id}"  />
+                                <materialDesign:DataGridTextColumn Header="Источник резерва" Binding="{Binding reserve_source}"/>
+                                <materialDesign:DataGridTextColumn Header="Дата резерва" Binding="{Binding reserve_date}"/>
+                                <materialDesign:DataGridTextColumn Header="Статус резерва" Binding="{Binding reserve_status}"/>
+                            </DataGrid.Columns>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding task_status}" Value="Выполнено">
+                                            <Setter Property="Background" Value="#D0F0D8"></Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding task_status}" Value="В работе">
+                                            <Setter Property="Background" Value="#FFF0D0D0"></Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                        <Button 
+                            HorizontalAlignment="Left"
+                            Margin="40, 0, 0, 40"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="406" Click="Button_Click_2">
+                            <TextBlock Text="Зарезервировать товар" FontSize="32"/>
+                        </Button>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Width="143">
+                    <TabItem.Header>
+                        <StackPanel
+                              Width="auto"
+                              Height="auto">
+                            <materialDesign:PackIcon
+                                Foreground="#FFD0C884"
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="CalendarCheck" />
+                            <TextBlock
+                                Foreground="Black"
+                                HorizontalAlignment="Center"
+                                Text="События" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" Margin="0,40,0,0">
+                            <DatePicker
+                          FontSize="25"
+                          materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                          materialDesign:HintAssist.FloatingOffset="0,-22"
+                          materialDesign:HintAssist.Hint="Выберите период"
+                          materialDesign:HintAssist.Foreground="Black"
+                          Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,0,40,0" >
+                                <DatePicker.CalendarStyle>
+                                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                        <Style.Resources>
+                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                        </Style.Resources>
+                                    </Style>
+                                </DatePicker.CalendarStyle>
+                            </DatePicker>
+                            <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,0,0,0" Foreground="#FFD0C884"/>
+                        </StackPanel>
+                        <DataGrid Margin="40" x:Name="Event" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25" SelectionChanged="Event_SelectionChanged">
+                            <DataGrid.Columns >
+                                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding event_id}"  />
+                                <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding event_title}"/>
+                                <materialDesign:DataGridTextColumn Header="Дата события" Binding="{Binding event_date}"/>
+                            </DataGrid.Columns>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                </Style>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                        <Button 
+                            HorizontalAlignment="Left"
+                            Margin="40, 0, 0, 40"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="406" Click="Button_Click_2">
+                            <TextBlock Text="Создать событие" FontSize="32"/>
+                        </Button>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Width="143">
+                    <TabItem.Header>
+                        <StackPanel
+                              Width="auto"
+                              Height="auto">
+                            <materialDesign:PackIcon
+                                Foreground="#FFD0C884"
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="AccountMultipleOutline" />
+                            <TextBlock
+                                Foreground="Black"
+                                HorizontalAlignment="Center"
+                                Text="Сотрудники" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <DataGrid Margin="40" x:Name="Employee" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25" materialDesign:ScrollBarAssist.ButtonsVisibility="Visible" MaxHeight='900'>
+                            <DataGrid.Columns >
+                                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding employee_id}"  />
+                                <materialDesign:DataGridTextColumn Header="ФИО" Binding="{Binding employee_name}"/>
+                                <materialDesign:DataGridTextColumn Header="Навыки" Binding="{Binding employee_skills}"/>
+                                <materialDesign:DataGridTextColumn Header="Должность" Binding="{Binding employee_position}"/>
+                                <materialDesign:DataGridTextColumn Header="Контактный номер" Binding="{Binding employee_phone}"/>
+                            </DataGrid.Columns>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="{x:Type DataGridRow}"/>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Width="143">
+                    <TabItem.Header>
+                        <StackPanel
+                              Width="auto"
+                              Height="auto">
+                            <materialDesign:PackIcon
+                                Foreground="#FFD0C884"
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="ChartAreaspline" />
+                            <TextBlock
+                                Foreground="Black"
+                                HorizontalAlignment="Center"
+                                Text="Статистика" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <materialDesign:Card>
+                            <TabControl
+                                HorizontalContentAlignment="Left"
+                                materialDesign:ColorZoneAssist.Background="#FFD0C884"
+                                 materialDesign:ColorZoneAssist.Foreground="Black"
+                                Style="{StaticResource MaterialDesignFilledTabControl}">
+                                <TabItem>
+                                    <TabItem.Header>
+                                        <TextBlock Text="Статистика по публикациям"/>
+                                    </TabItem.Header>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox
+                                              HorizontalAlignment="Center"
+                                              FontSize="25"
+                                              materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                              materialDesign:HintAssist.FloatingOffset="0,-22"
+                                              materialDesign:HintAssist.Hint="Выберите публикацию"
+                                              materialDesign:HintAssist.Foreground="Black"
+                                              BorderBrush="Black"
+                                                BorderThickness="2"
+                                              Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="40,40,40,0" Width="348" >
+                                            </TextBox>
+                                            <DatePicker
+                                              HorizontalAlignment="Left"
+                                              FontSize="25"
+                                              materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                              materialDesign:HintAssist.FloatingOffset="0,-22"
+                                              materialDesign:HintAssist.Hint="Выберите период"
+                                              materialDesign:HintAssist.Foreground="Black"
+                                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,40,40,0" Width="266" >
+                                                <DatePicker.CalendarStyle>
+                                                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                                        <Style.Resources>
+                                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                                        </Style.Resources>
+                                                    </Style>
+                                                </DatePicker.CalendarStyle>
+                                            </DatePicker>
+                                            <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,40,0,0" Foreground="#FFD0C884"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical">
+                                            <DataGrid Margin="40" x:Name="Stat_pub" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25">
+                                                <DataGrid.Columns >
+                                                    <materialDesign:DataGridTextColumn Header="Параметр" Binding="{Binding parameter_name}"  />
+                                                    <materialDesign:DataGridTextColumn Header="Значение" Binding="{Binding parameter_value}"/>
+                                                    <materialDesign:DataGridTextColumn Header="Дата измерения" Binding="{Binding parameter_date}"/>
+                                                </DataGrid.Columns>
+                                                <DataGrid.RowStyle>
+                                                    <Style TargetType="DataGridRow">
+                                                    </Style>
+                                                </DataGrid.RowStyle>
+                                            </DataGrid>
+                                            <Button 
+                                                materialDesign:ButtonAssist.CornerRadius="20"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                                ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Margin="40,0,1366,40" Click="Button_Click_3">
+                                                <TextBlock
+                                                    Text="Внести статистику" FontSize="32"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+                                <TabItem>
+                                    <TabItem.Header>
+                                    <TextBlock Text="Статистика по видеороликам" FontSize="14"/>
+                                    </TabItem.Header>
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBox
+                                              HorizontalAlignment="Center"
+                                              FontSize="25"
+                                              materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                              materialDesign:HintAssist.FloatingOffset="0,-22"
+                                              materialDesign:HintAssist.Hint="Выберите видеоролик"
+                                              materialDesign:HintAssist.Foreground="Black"
+                                              BorderBrush="Black"
+                                                BorderThickness="2"
+                                              Style="{StaticResource MaterialDesignOutlinedTextBox}" Margin="40,40,40,0" Width="348" >
+                                            </TextBox>
+                                            <DatePicker
+                                              HorizontalAlignment="Left"
+                                              FontSize="25"
+                                              materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                                              materialDesign:HintAssist.FloatingOffset="0,-22"
+                                              materialDesign:HintAssist.Hint="Выберите период"
+                                              materialDesign:HintAssist.Foreground="Black"
+                                              Style="{StaticResource MaterialDesignOutlinedDatePicker}" Margin="40,40,40,0" Width="266" >
+                                                <DatePicker.CalendarStyle>
+                                                    <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                                                        <Style.Resources>
+                                                            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                                            <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                                                        </Style.Resources>
+                                                    </Style>
+                                                </DatePicker.CalendarStyle>
+                                            </DatePicker>
+                                            <materialDesign:PackIcon Kind="Filter" Height="71" Width="71" Margin="0,40,0,0" Foreground="#FFD0C884"/>
+                                        </StackPanel>
+                                        <StackPanel Orientation="Vertical">
+                                            <DataGrid Margin="40" x:Name="Stat_vid" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25">
+                                                <DataGrid.Columns >
+                                                    <materialDesign:DataGridTextColumn Header="Параметр" Binding="{Binding parameter_name}"  />
+                                                    <materialDesign:DataGridTextColumn Header="Значение" Binding="{Binding parameter_value}"/>
+                                                    <materialDesign:DataGridTextColumn Header="Дата измерения" Binding="{Binding parameter_date}"/>
+                                                </DataGrid.Columns>
+                                                <DataGrid.RowStyle>
+                                                    <Style TargetType="DataGridRow">
+                                                    </Style>
+                                                </DataGrid.RowStyle>
+                                            </DataGrid>
+                                            <Button 
+                                                materialDesign:ButtonAssist.CornerRadius="20"
+                                                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                                Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                                ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Margin="40,0,1366,40" Click="Button_Click_3">
+                                                <TextBlock
+                                                    Text="Внести статистику" FontSize="32"/>
+                                            </Button>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </TabItem>
+                            </TabControl>
+                        </materialDesign:Card>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Width="143">
+                    <TabItem.Header>
+                        <StackPanel
+                              Width="auto"
+                              Height="auto">
+                            <materialDesign:PackIcon
+                                Foreground="#FFD0C884"
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="CurrencyRub" />
+                            <TextBlock
+                                Foreground="Black"
+                                HorizontalAlignment="Center"
+                                Text="Товар" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <StackPanel>
+                        <TextBox materialDesign:HintAssist.Hint="Найти" 
+                                         materialDesign:HintAssist.HintOpacity="100"
+                                         materialDesign:HintAssist.FloatingHintHorizontalAlignment="Inherit" 
+                                         materialDesign:HintAssist.Foreground="Black"
+                                         BorderBrush="Black" 
+                                         FontSize="25"
+                                         Padding="5" 
+                                         HorizontalContentAlignment="Left" 
+                                         Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+                                         Margin="40,40,1578,0" />
+                        <DataGrid Margin="40" x:Name="Goods" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25">
+                            <DataGrid.Columns >
+                                <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding good_id}"  />
+                                <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding good_name}"/>
+                                <materialDesign:DataGridTextColumn Header="Бренд" Binding="{Binding good_brand}"/>
+                                <materialDesign:DataGridTextColumn Header="Артикул" Binding="{Binding good_article}"/>
+                                <materialDesign:DataGridTextColumn Header="Количество на складе" Binding="{Binding good_amount}">
+                                    <materialDesign:DataGridTextColumn.ElementStyle>
+                                        <Style TargetType="{x:Type TextBlock}">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding stock}" Value="True" >
+                                                    <Setter  Property="Foreground" Value="Green"/>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding stock}" Value="False" >
+                                                    <Setter  Property="Foreground" Value="Red"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </materialDesign:DataGridTextColumn.ElementStyle>
+                                </materialDesign:DataGridTextColumn>
+                                <materialDesign:DataGridTextColumn Header="Статус" Binding="{Binding good_status}"/>
+                            </DataGrid.Columns>
+                            <DataGrid.RowStyle>
+                                <Style TargetType="{x:Type DataGridRow}"/>
+                            </DataGrid.RowStyle>
+                        </DataGrid>
+                        <Button 
+                            HorizontalAlignment="Left"
+                            Margin="40, 0, 0, 40"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="414">
+                            <TextBlock Text="Зарезервировать товар" FontSize="32"/>
+                        </Button>
+                    </StackPanel>
+                </TabItem>
+                <TabItem Width="143">
+                    <TabItem.Header>
+                        <StackPanel
+                              Width="auto"
+                              Height="auto">
+                            <materialDesign:PackIcon
+                                Foreground="#FFD0C884"
+                                Width="30"
+                                Height="30"
+                                HorizontalAlignment="Center"
+                                Kind="Account" />
+                            <TextBlock
+                                Foreground="Black"
+                                HorizontalAlignment="Center"
+                                Text="Профиль" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <Grid>
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBox
+                                        Height="76"
+                                        VerticalAlignment="Top"
+                                        BorderThickness="6"
+                                        BorderBrush="#FFD0C884"
+                                        FontSize="21"
+                                        FontWeight="Bold"
+                                        Foreground="Black"
+                                        materialDesign:HintAssist.Hint="ФИО"
+                                        materialDesign:HintAssist.Foreground="Black"
+                                        materialDesign:TextFieldAssist.CharacterCounterVisibility="Visible"
+                                        MaxLength="100"
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        TextWrapping="Wrap"
+                                        VerticalScrollBarVisibility="Auto" Margin="50,100,0,0"
+                                        Text="Алиев Игорь Артурович" Width="327"/>
+                                    <TextBox
+                                        Height="76"
+                                        VerticalAlignment="Top"
+                                        BorderThickness="6"
+                                        BorderBrush="#FFD0C884"
+                                        FontSize="21"
+                                        FontWeight="Bold"
+                                        Foreground="Black"
+                                        materialDesign:HintAssist.Hint="Должность"
+                                        materialDesign:HintAssist.Foreground="Black"
+                                        materialDesign:TextFieldAssist.CharacterCounterVisibility="Visible"
+                                        MaxLength="100"
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        TextWrapping="Wrap"
+                                        VerticalScrollBarVisibility="Auto" Margin="50,100,0,0"
+                                        Text="Младший SMM-менеджер" Width="327"/>
+                                    <TextBox
+                                        Height="74"
+                                        VerticalAlignment="Top"
+                                        BorderThickness="6"
+                                        BorderBrush="#FFD0C884"
+                                        FontSize="21"
+                                        FontWeight="Bold"
+                                        Foreground="Black"
+                                        materialDesign:HintAssist.Hint="Контактный номер"
+                                        materialDesign:HintAssist.Foreground="Black"
+                                        materialDesign:TextFieldAssist.CharacterCounterVisibility="Visible"
+                                        MaxLength="100"
+                                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                                        TextWrapping="Wrap"
+                                        VerticalScrollBarVisibility="Auto" Margin="50,100,0,0"
+                                        Text="89166449289" Width="206"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="Навыки" FontWeight="Bold" Margin="50,30,0, 0" FontSize="30"/>
+                                    <DataGrid Margin="50, 20, 0, 0" x:Name="Skills" AutoGenerateColumns="False" FontSize="25">
+                                        <DataGrid.Columns >
+                                            <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding skill_id}"  />
+                                            <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding skill_name}"/>
+                                            <materialDesign:DataGridTextColumn Header="Описание" Binding="{Binding skill_description}"/>
+                                        </DataGrid.Columns>
+                                        <DataGrid.RowStyle>
+                                            <Style TargetType="{x:Type DataGridRow}"/>
+                                        </DataGrid.RowStyle>
+                                    </DataGrid>
+                                    <TextBlock Text="Задачи" FontWeight="Bold" Margin="50,30,0, 0" FontSize="30"/>
+                                    <DataGrid Margin="50, 20, 0, 0" x:Name="Employee_task" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25" SelectionChanged="Task_info_SelectionChanged">
+                                        <DataGrid.Columns >
+                                            <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding task_id}"  />
+                                            <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding task_title}"/>
+                                            <materialDesign:DataGridTextColumn Header="Дата назначения" Binding="{Binding assignment_date}"/>
+                                            <materialDesign:DataGridTextColumn Header="Ожидаемая дата выполнения" Binding="{Binding estimated_date}"/>
+                                            <materialDesign:DataGridTextColumn Header="Постановщик" Binding="{Binding employee_who_gave_the_task}"/>
+                                            <materialDesign:DataGridTextColumn Header="Статус" Binding="{Binding task_status}"/>
+                                        </DataGrid.Columns>
+                                        <DataGrid.RowStyle>
+                                            <Style TargetType="DataGridRow"/>
+                                        </DataGrid.RowStyle>
+                                    </DataGrid>
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical">
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+        </materialDesign:Card>
+    </Grid>
+</Window>

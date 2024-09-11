@@ -1,0 +1,110 @@
+﻿<Window x:Class="BKP.FullReserve"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:BKP"
+        mc:Ignorable="d"
+        Title="Информация о резерве" Height="976.5" Width="1164" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel>
+            <StackPanel Margin="40,30,0,0" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Height="136">
+                <TextBox
+                    Height="76"
+                    VerticalAlignment="Top"
+                    BorderThickness="4"
+                    BorderBrush="#FFD0C884"
+                    FontSize="21"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    materialDesign:HintAssist.Hint="Сотрудник, создавший резерв"
+                    materialDesign:HintAssist.Foreground="Black"
+                    TextWrapping="Wrap"
+                    Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                    VerticalScrollBarVisibility="Auto" Margin="0,30,71,0" Width="290">
+                    <TextBox.Text>
+                        Алиев Игорь
+                    </TextBox.Text>
+                </TextBox>
+                <TextBox
+                        Height="76"
+                        VerticalAlignment="Top"
+                        BorderThickness="4"
+                        BorderBrush="#FFD0C884"
+                        FontSize="21"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        materialDesign:HintAssist.Hint="Статус"
+                        materialDesign:HintAssist.Foreground="Black"
+                        TextWrapping="Wrap"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        VerticalScrollBarVisibility="Auto" Margin="0,30,71,0" Text="Активен"/>
+                <TextBox
+                        Height="76"
+                        VerticalAlignment="Top"
+                        BorderThickness="4"
+                        BorderBrush="#FFD0C884"
+                        FontSize="21"
+                        FontWeight="Bold"
+                        Foreground="Black"
+                        materialDesign:HintAssist.Hint="На основании"
+                        materialDesign:HintAssist.Foreground="Black"
+                        TextWrapping="Wrap"
+                        Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                        VerticalScrollBarVisibility="Auto" Margin="0,30,71,0" Text="Публикация №6"/>
+                <DatePicker
+                    FontSize="25"
+                    materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+                    materialDesign:HintAssist.FloatingOffset="0,-22"
+                    materialDesign:HintAssist.Hint="Дата резерва"
+                    materialDesign:HintAssist.Foreground="Black"
+                    Margin="0,30"
+                    Style="{StaticResource MaterialDesignOutlinedDatePicker}" Height="76" >
+                    <DatePicker.CalendarStyle>
+                        <Style TargetType="Calendar" BasedOn="{StaticResource MaterialDesignCalendarPortrait}">
+                            <Style.Resources>
+                                <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#FFD0C884" />
+                                <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#FFD0C884" />
+                            </Style.Resources>
+                        </Style>
+                    </DatePicker.CalendarStyle>
+                </DatePicker>
+            </StackPanel>
+             <StackPanel Margin="0,0,0,0">
+                <DataGrid Margin="40" x:Name="Goods" AutoGenerateColumns="False" IsReadOnly="True" FontSize="25">
+                    <DataGrid.Columns >
+                        <materialDesign:DataGridTextColumn Header="ID" Binding="{Binding good_id}"  />
+                        <materialDesign:DataGridTextColumn Header="Название" Binding="{Binding good_name}"/>
+                        <materialDesign:DataGridTextColumn Header="Бренд" Binding="{Binding good_brand}"/>
+                        <materialDesign:DataGridTextColumn Header="Артикул" Binding="{Binding good_article}"/>
+                        <materialDesign:DataGridTextColumn Header="Количество" Binding="{Binding good_amount}"/>
+                    </DataGrid.Columns>
+                    <DataGrid.RowStyle>
+                        <Style TargetType="{x:Type DataGridRow}"/>
+                    </DataGrid.RowStyle>
+                </DataGrid>
+                <StackPanel Orientation="Horizontal">
+                    <Button 
+                            HorizontalAlignment="Left"
+                            Margin="40, 0, 0, 40"
+                            materialDesign:ButtonAssist.CornerRadius="20"
+                            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFD0F0D8" BorderBrush="#FFD0F0D8" Width="414">
+                        <TextBlock Text="Сохранить изменения" FontSize="32"/>
+                    </Button>
+                    <Button 
+                    HorizontalAlignment="Left"
+                    Margin="50, -40, 0, 0"
+                    materialDesign:ButtonAssist.CornerRadius="20"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                    ToolTip="MaterialDesignRaisedLightButton with Round Corners" Height="80" Background="#FFF0D0D0" BorderBrush="{x:Null}" Width="263">
+                        <TextBlock Text="Удалить запись" FontSize="32"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
